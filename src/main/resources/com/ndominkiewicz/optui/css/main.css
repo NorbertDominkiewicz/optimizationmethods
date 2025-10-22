@@ -1,63 +1,66 @@
 .root {
     /*-fx-background-color: linear-gradient(to right, #e3dfc3, #d3d3d3);*/
-    -fx-background-color: #e8e5e1;
+    -fx-background-color: #ffffff;
     -fx-background-radius: 36px;
     -fx-border-width: 0px;
 }
 
-.main-grid {
-    -fx-background-color: transparent;
+.mainPane {
+    -fx-background-color: #0D1F1A;
 }
 
-.grid-player {
-    /*-fx-background-color: linear-gradient(to bottom, rgba(197, 194, 170, 0.84), rgba(162, 161, 161, 0.91));*/
-    -fx-background-color: #ece5dc;
-    -fx-background-radius: 0 0 64px 64px;
-    -fx-padding: 10px 0 0 0;
-    -fx-hgap: 30px;
+.tab-header-area {
+    -fx-padding: 0 0 5 5;
 }
 
-.player {
-    -fx-background-color: #dad4cb;
-    -fx-pref-width: 320px;
-    -fx-pref-height: 60px;
+.view-button {
+    -fx-background-color: #0f493a;
     -fx-background-radius: 24px;
-    -fx-padding: 10px;
-    -fx-spacing: 14px;
-}
-
-.player-options {
-    -fx-background-color: #dad4cb;
-    -fx-pref-width: 180px;
-    -fx-pref-height: 60px;
-    -fx-background-radius: 24px;
-    -fx-padding: 10px;
-    -fx-spacing: 14px;
-}
-
-.player-button{
-    -fx-background-color: #183127;
-    -fx-background-radius: 50%;
-    -fx-pref-width: 40px;
-    -fx-pref-height: 40px;
+    -fx-padding: 8px 12px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #f3f3f3;
     -fx-cursor: hand;
 }
 
-.tempo-button{
-    -fx-background-color: #183127;
-    -fx-background-radius: 14px;
-    -fx-pref-width: 70px;
-    -fx-pref-height: 40px;
+.view-button:hover {
+    -fx-background-color: #0a3328;
+}
+
+.tab-header-background {
+    -fx-background-color: #b7bbb1;
+    -fx-border-color: #404040;
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab {
+    -fx-background-color: #e3dcdc;
+    -fx-background-radius: 10px 10px 0 0;
+    -fx-padding: 2px 16px;
+    -fx-text-fill: white;
+    -fx-border-width: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-label {
+    -fx-border-width: 0;
+}
+
+.tab:hover {
+    -fx-background-color: #eae5e5;
     -fx-cursor: hand;
 }
 
 .project-title {
     -fx-text-fill: #f3f3f3;
+    -fx-font-weight: 700;
+    -fx-font-family: Carlito;
+    -fx-font-size: 16px;
 }
 
 .top-nav, .bot-nav {
     /*-fx-background-color: linear-gradient(to right, rgba(197, 194, 170, 0.84), rgba(162, 161, 161, 0.91));*/
-    -fx-background-color: #940e12;
+    -fx-background-color: #142D26;
 }
 
 .top-nav {
@@ -81,80 +84,6 @@
 
 .btn-close {
     -fx-background-color: linear-gradient(to bottom, #fa1515, #e00202);
-}
-.right-aside, .left-aside {
-    /*-fx-background-color: linear-gradient(to right, rgba(197, 194, 170, 0.84), rgba(162, 161, 161, 0.91));*/
-    -fx-background-color: #ece5dc;
-    -fx-padding: 10px;
-}
-
-.accordion {
-    -fx-background-color: transparent;
-}
-
-/* Podstawowy TitledPane */
-.titled-pane {
-    -fx-background-color: #f8f9fa;
-    -fx-border-color: #dee2e6;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-padding: 0;
-}
-
-.scroll-pane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0px;
-    -fx-border-radius: 5px;
-    -fx-padding: 20px;
-}
-
-.scroll-pane > .viewport {
-    -fx-background-color: #f3f3f3;
-    -fx-background-radius: 4px;
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-border-radius: 4px;
-}
-
-/* Tytuł TitledPane (główny obszar klikalny) */
-.titled-pane > .title {
-    -fx-background-color: linear-gradient(to bottom, #d2d8de, #c5cad0);
-    -fx-background-radius: 5px 5px 0 0;
-    -fx-padding: 6px 8px;
-    -fx-border-color: transparent;
-    -fx-cursor: hand;
-}
-
-/* Tytuł kiedy TitledPane jest rozwinięty */
-.titled-pane:expanded > .title {
-    -fx-background-color: linear-gradient(to bottom, #183127, #142820);
-    -fx-text-fill: white;
-}
-
-/* Hover na tytule */
-.titled-pane > .title:hover {
-    -fx-background-color: linear-gradient(to bottom, #dae0e5, #c8cfd6);
-    -fx-text-fill: white;
-}
-
-.titled-pane:expanded > .title:hover {
-    -fx-background-color: linear-gradient(to bottom, #183127, #142820);
-    -fx-text-fill: white;
-}
-
-.titled-pane:expanded > .title > .text {
-    -fx-fill: white;
-}
-
-.right-aside {
-    -fx-background-radius: 0px 0px 0px 64px;
-    -fx-background-insets: 0 0 40 0;
-}
-
-.left-aside {
-    -fx-background-radius: 0px 0px 64px 0px;
-    -fx-background-insets: 0 0 40 0;
 }
 
 .zoom-btn {

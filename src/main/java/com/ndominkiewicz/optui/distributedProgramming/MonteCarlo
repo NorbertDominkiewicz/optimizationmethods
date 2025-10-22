@@ -1,0 +1,109 @@
+public class MonteCarlo {
+    private final int areaWidth;
+    private final int areaHeight;
+    private int currentPoint;
+    private int pointsInCircle;
+    private long finalTime;
+    private boolean isRunning = false;
+    private ViewController controller;
+    private  GraphicsContext graphicsContext;
+    private Label result;
+    private Label timer;
+    public MonteCarlo(int areaWidth, int areaHeight, Label result, Label timer){
+        this.areaWidth = areaWidth;
+        this.areaHeight = areaHeight;
+        this.result = result;
+        this.timer = timer;
+    }
+    public void runNonLinearly(int totalPoints, GraphicsContext gc) {
+        graphicsContext = gc;
+        if (!isRunning) {
+            isRunning = true;
+            clearData();
+            long startTime = System.currentTimeMillis();
+            WritableImage img = new WritableImage(areaWidth, areaHeight);
+            PixelWriter pixelWriter = img.getPixelWriter();
+            Process thread1 = new Process("Monte Carlo NonLinear 1", areaWidth, areaHeight, graphicsContext, pixelWriter, img, totalPoints/2);
+            Process thread2 = new Process("Monte Carlo NonLinear 2", areaWidth, areaHeight, graphicsContext, pixelWriter, img, totalPoints/2);
+            thread1.start();
+            thread2.start();
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(30), e -> {
+                        int totalCurrPoints = thread1.getCurrentPoint() + thread2.getCurrentPoint();
+                        int totalCirclePoints = thread1.getPointsInCircle() + thread2.getPointsInCircle();
+                        long currentTime = System.currentTimeMillis();
+                        double PI = 4.0 * totalCirclePoints / totalCurrPoints;
+                        if(totalCirclePoints >= totalPoints) {
+                            result.setText(PI + " π");
+                            timer.setText((currentTime - startTime) * 0.001 + " s");
+                            finalTime = System.currentTimeMillis() - startTime;
+                            return;
+                        }
+                        result.setText(PI + " π");
+                        timer.setText((currentTime - startTime) * 0.001 + " s");
+                }
+            ));
+            timeline.setCycleCount(Timeline.INDEFINITE);
+            Thread monitor = new Thread(() -> {
+                try {
+                    thread1.join();
+                    thread2.join();
+                    Platform.runLater(() -> {
+                        timeline.stop();
+                        isRunning = false;
+                        gc.drawImage(img, 0, 0);
+                    });
+                } catch (InterruptedException exception) {
+                    exception.printStackTrace();
+                }
+            });
+            monitor.start();
+            timeline.play();
+        }
+    }
+    private void clearData() {
+        currentPoint = 0;
+        pointsInCircle = 0;
+        finalTime = 0;
+    }
+    public void runLinearly(int totalPoints, GraphicsContext gc) {
+        graphicsContext = gc;
+        if (!isRunning) {
+            isRunning = true;
+            clearData();
+            long startTime = System.currentTimeMillis();
+            WritableImage img = new WritableImage(areaWidth, areaHeight);
+            PixelWriter pw = img.getPixelWriter();
+            Random random = new Random();
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(1), event -> {
+                    if(currentPoint >= totalPoints) {
+                        return;
+                    }
+                    double x = random.nextDouble() * 2 - 1;
+                    double y = random.nextDouble() * 2 - 1;
+                    int px = (int) ((x + 1) * areaWidth / 2);
+                    int py = (int) ((y + 1) * areaHeight / 2);
+                    if(Math.pow(x, 2) + Math.pow(y, 2) <= 1) {
+                        pw.setColor(px, py, Color.color(0.9, 0.9, 0.4));
+                        pointsInCircle++;
+                    } else {
+                        pw.setColor(px, py,Color.color(0.6, 0.0, 0.0));
+                    }
+                    graphicsContext.drawImage(img, 0, 0);
+                    long currentTime = System.currentTimeMillis();
+                    currentPoint++;
+                    double PI = 4.0 * pointsInCircle / currentPoint;
+                    result.setText(PI + " π");
+                    timer.setText((currentTime - startTime) * 0.001 + " s");
+                }
+            ));
+            timeline.setCycleCount(totalPoints);
+            timeline.setOnFinished(event -> {
+                finalTime = System.currentTimeMillis() - startTime;
+                isRunning = false;
+            });
+            timeline.play();
+        }
+    }
+
+}
