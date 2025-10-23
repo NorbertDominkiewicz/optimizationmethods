@@ -30,11 +30,14 @@ public class MainController implements Initializable {
     @FXML
     private Button linearCarlo;
     @FXML
+    private Button fibonacci;
+    @FXML
     private Button nonLinearCarlo;
     //
     BisectionController bisectionController;
     LinearCarloController linearCarloController;
     NonLinearCarloController nonLinearCarloController;
+    FibonacciController fibonacciController;
     List<ViewController> controllers;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +50,7 @@ public class MainController implements Initializable {
         dwudzielna.setOnAction(event -> switchView(Page.BISECTION));
         linearCarlo.setOnAction(event -> switchView(Page.LINEARCARLO));
         nonLinearCarlo.setOnAction(event -> switchView(Page.NONLINEARCARLO));
+        fibonacci.setOnAction( event -> switchView(Page.FIBONACCI));
     }
     private void changeTitle(String value) {
         Platform.runLater(() -> title.setText(value));
@@ -86,6 +90,17 @@ public class MainController implements Initializable {
                 } else {
                     mainPane.getChildren().add(nonLinearCarloController.getView());
                     changeTitle("Algorytm Monte Carlo Nieliniowo");
+                }
+            }
+            case FIBONACCI -> {
+                if (fibonacciController == null) {
+                    name = "fibonacci";
+                    changeTitle("Metoda Fibonacciego");
+                    fibonacciController = loadController(name);
+                    controllers.add(fibonacciController);
+                } else {
+                    mainPane.getChildren().add(fibonacciController.getView());
+                    changeTitle("Metoda Fibonacciego");
                 }
             }
         }

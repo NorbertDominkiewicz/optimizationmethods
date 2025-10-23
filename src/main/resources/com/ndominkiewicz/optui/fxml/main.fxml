@@ -98,7 +98,7 @@
                         <Insets left="15.0" />
                      </FlowPane.margin>
                   </Button>
-                  <Button mnemonicParsing="false" styleClass="view-button" text="FIBONACCI" />
+                  <Button fx:id="fibonacci" mnemonicParsing="false" styleClass="view-button" text="FIBONACCI" />
                </children>
             </FlowPane>
          </children>

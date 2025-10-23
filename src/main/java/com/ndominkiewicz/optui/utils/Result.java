@@ -1,6 +1,7 @@
 package com.ndominkiewicz.optui.utils;
 
 import com.ndominkiewicz.optui.optimizationMethods.Bisection;
+import com.ndominkiewicz.optui.optimizationMethods.Fibonacci;
 
 import java.util.List;
 
@@ -16,6 +17,12 @@ public class Result {
         CLI.log("L = " + algorithm.L);
         CLI.log("x1, x2 : (" + algorithm.x1 + ", " + algorithm.x2 + ")");
         CLI.log("xsr = " + algorithm.xsr);
+    }
+    public static void writeOut(Fibonacci algorithm, double result) {
+        CLI.log("Fibonacci algorithm in " + algorithm.mode + " mode");
+        CLI.log("a = [" + algorithm.a + ", " + algorithm.b + "] = b");
+        CLI.log("x1, x2 : (" + algorithm.x1 + ", " + algorithm.x2 + ")");
+        CLI.log("Result: " + result);
     }
     public Result(int sectorId, int pointsInCircle, int totalPoints, List<Point> points) {
         this.sectorId = sectorId;
